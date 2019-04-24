@@ -1,9 +1,9 @@
 class DisplayInfoBtn extends HTMLElement {
   constructor() {
     super();
-    this._infoContainer;
+    this._info;
     this._btnText = "Show Info";
-    this.isHidden = true;
+    this._isHidden = true;
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
         <button></button>
@@ -15,27 +15,27 @@ class DisplayInfoBtn extends HTMLElement {
       this._btnText = this.getAttribute("text");
     }
     const btn = this.shadowRoot.querySelector("button");
-    this._infoContainer = this.shadowRoot.querySelector("slot");
-    this._infoContainer.style.display = "none";
+    this._info = this.shadowRoot.querySelector("slot");
+    this._info.style.display = "none";
 
     btn.textContent = this._btnText;
     btn.addEventListener("click", () => {
-      if (this.isHidden) {
+      if (this._isHidden) {
         this._showInfo();
-        this.isHidden = false;
+        this._isHidden = false;
         btn.textContent = "Hide Info";
       } else {
         this._hideInfo();
-        this.isHidden = true;
+        this._isHidden = true;
         btn.textContent = "Show Info";
       }
     });
   }
   _showInfo() {
-    this._infoContainer.style.display = "block";
+    this._info.style.display = "block";
   }
   _hideInfo() {
-    this._infoContainer.style.display = "none";
+    this._info.style.display = "none";
   }
 }
 
